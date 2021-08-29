@@ -33,8 +33,14 @@
 
  header p{
      font-family: Arial, Helvetica, sans-serif;
+     color: white;
      font-size: 25px;
      margin: 20px auto;
+     width: 60px;
+     height: 50px;
+     padding: 15px 25px;
+     background-color:#bbada0;
+     border-radius: 10px;
  }
 
  #grid-container{
