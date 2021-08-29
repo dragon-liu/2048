@@ -4,9 +4,28 @@ var score = 0;
 var hasConflicted = new Array(); //note:控制16个格子每个只能相等合并一次
 
 $(document).ready(function () {
+    prepareForMobile();
     newgame();
 });
 
+function prepareForMobile(){
+
+    if(documentWidth > 500)
+    {
+        gridContainerWidth = 500;
+        cellSpace = 20;
+        cellSideLength = 100;
+    }
+
+    $('#grid-container').css('width', gridContainerWidth - 2*cellSpace);
+    $('#grid-container').css('height', gridContainerWidth - 2*cellSpace);
+    $('#grid-container').css('padding', cellSpace);
+    $('#grid-container').css('border-radius', 0.02*gridContainerWidth);
+
+    $('.grid-cell').css('width', cellSideLength);
+    $('.grid-cell').css('height', cellSideLength);
+    $('.grid-cell').css('border-radius', 0.02*cellSideLength);
+}
 
 function newgame(){
     //初始化整个棋盘
@@ -57,12 +76,12 @@ function updateBoardView(){
             if(board[i][j] == 0){
                 theNumberCell.css('width', '0px');
                 theNumberCell.css('height', '0px');
-                theNumberCell.css('top', getPosTop(i, j) + 50);
-                theNumberCell.css('left', getPosLeft(i, j) + 50);
+                theNumberCell.css('top', getPosTop(i, j) + 0.5*cellSideLength);
+                theNumberCell.css('left', getPosLeft(i, j) + 0.5*cellSideLength);
             }
             else{
-                theNumberCell.css('width', '100px');
-                theNumberCell.css('height', '100px');
+                theNumberCell.css('width', cellSideLength);
+                theNumberCell.css('height', cellSideLength);
                 theNumberCell.css('top', getPosTop(i, j) );
                 theNumberCell.css('left', getPosLeft(i, j) );
                 theNumberCell.css('background-color', getNumberBackgroundColor(board[i][j]));
@@ -73,6 +92,9 @@ function updateBoardView(){
             hasConflicted[i][j] = false; //note:代表新的一轮开始
         }
     }
+
+    $('.number-cell').css('line-height', cellSideLength+'px'); //todo:'px'可加可不加？
+    $('.number-cell').css('font-size', 0.6*cellSideLength+'px');
 }
 
 function generateOneNumber(){
@@ -83,7 +105,7 @@ function generateOneNumber(){
     //随机一个位置
     var randx = parseInt(Math.floor(Math.random() * 4));
     var randy = parseInt(Math.floor(Math.random() * 4));
-    
+
     var times = 0;
     while(times < 50)
     {

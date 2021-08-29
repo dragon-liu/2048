@@ -1,10 +1,16 @@
+//todo:这里不需要var来声明变量吗
+documentWidth = window.screen.availWidth; //note:获取屏幕可用宽度
+gridContainerWidth = 0.92*documentWidth;
+cellSideLength = 0.18*documentWidth;
+cellSpace = 0.04*documentWidth;
+
 //底层支撑逻辑
 function getPosTop(i, j){
-    return 20 + i*120;
+    return cellSpace + i*(cellSideLength+cellSpace);
 }
 
 function getPosLeft(i, j){
-    return 20 + j*120;
+    return cellSpace + j*(cellSideLength+cellSpace);
 } 
 
 function getNumberBackgroundColor(number){
