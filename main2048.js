@@ -83,13 +83,27 @@ function generateOneNumber(){
     //随机一个位置
     var randx = parseInt(Math.floor(Math.random() * 4));
     var randy = parseInt(Math.floor(Math.random() * 4));
-    while(true)
+    var times = 0;
+    while(times < 50)
     {
         if(board[randx][randy] == 0)
             break;
         
-            randx = parseInt(Math.floor(Math.random() * 4));
-            randy = parseInt(Math.floor(Math.random() * 4));
+        randx = parseInt(Math.floor(Math.random() * 4));
+        randy = parseInt(Math.floor(Math.random() * 4));
+
+        times++;
+    }
+
+    if(times == 50){
+        for( var i = 0; i < 4; i++)
+            for(var j = 0; j < 4;j++)
+                if( board[i][j] == 0 )
+                {
+                    randx = i;
+                    randy = j;
+                    //todo:不break则一直到最后一个空格才停止，但双层循环要2个break也不至于
+                }
     }
 
     //随机一个数字2或4
@@ -171,7 +185,7 @@ function moveLeft(){
                         board[i][k] = board[i][j];
                         board[i][j] = 0;
                         continue;
-                    }
+                    }                                                                  //note:没有合并过的格子才能相等合并
                     else if( board[i][k] == board[i][j] && noBlockHorizontal( i, k, j, board) && !hasConflicted[i][k] )
                     {
                         //moveleft
