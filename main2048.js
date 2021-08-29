@@ -3,6 +3,11 @@ var board = new Array();
 var score = 0;
 var hasConflicted = new Array(); //note:控制16个格子每个只能相等合并一次
 
+var startx = 0;
+var starty = 0;
+var endx = 0;
+var endy = 0;
+
 $(document).ready(function () {
     prepareForMobile();
     newgame();
@@ -143,6 +148,7 @@ function generateOneNumber(){
 $(document).keydown(function ( event ) { 
     switch(event.keyCode){
         case 37: //left
+            event.preventDefault(); //note:解决电脑分辨率较低出现滑动条后方向键同时导致滑动条滑动的现象，会关掉相应按键原本的默认设置(如方向键滑动滑动条)
             if( moveLeft() ) 
             {
                 setTimeout("generateOneNumber()", 210);
@@ -150,6 +156,7 @@ $(document).keydown(function ( event ) {
             }
             break;
         case 38: //up
+            event.preventDefault();
             if( moveUp() )
             {
                 setTimeout("generateOneNumber()", 210);
@@ -157,6 +164,7 @@ $(document).keydown(function ( event ) {
             }
             break;
         case 39: //right
+            event.preventDefault();
             if( moveRight() )
             {
                 setTimeout("generateOneNumber()", 210);
@@ -164,6 +172,7 @@ $(document).keydown(function ( event ) {
             }
             break;
         case 40: //down
+            event.preventDefault();
             if( moveDown() )
             {
                 setTimeout("generateOneNumber()", 210);
@@ -175,6 +184,76 @@ $(document).keydown(function ( event ) {
             break;
     }
 });
+
+//js捕捉touchstart这个事件
+document.addEventListener('touchstart', function(event){
+    startx = event.touches[0].pageX;
+    starty = event.touches[0].pageY;
+});
+
+//note:解决手指识别不管用的问题
+document.addEventListener('touchstart', function(event){
+    event.preventDefault();
+});
+
+//js捕捉touchend这个事件
+document.addEventListener('touchend', function(event){
+    endx = event.changedTouches[0].pageX;
+    endy = event.changedTouches[0].pageY;
+
+    var deltax = endx - startx;
+    var deltay = endy - starty;
+
+    //note:只有用户在屏幕上滑动足够距离才被判定为有效活动，单纯点击不算滑动
+    if( Math.abs(deltax) < 0.3*documentWidth && Math.abs(deltay) < 0.3*documentWidth)
+        return;
+
+    //x
+    if( Math.abs(deltax) >= Math.abs(deltay) )
+    {
+        if( deltax > 0)
+        {
+            //moveright
+            if( moveRight() )
+            {
+                setTimeout("generateOneNumber()", 210);
+                setTimeout("isgameover()", 300);
+            }
+        }
+        else
+        {
+            //moveleft
+            if( moveLeft() ) 
+            {
+                setTimeout("generateOneNumber()", 210);
+                setTimeout("isgameover()", 300);
+            }
+        }
+    }
+    //y
+    else
+    {
+        if( deltay > 0)
+        {
+            //moveDown
+            if( moveDown() )
+            {
+                setTimeout("generateOneNumber()", 210);
+                setTimeout("isgameover()", 300);
+            }
+        }
+        else
+        {
+            //moveUp
+            if( moveUp() )
+            {
+                setTimeout("generateOneNumber()", 210);
+                setTimeout("isgameover()", 300);
+            }
+        }
+    }
+});
+
 
 function isgameover(){
     if( nospace( board ) && nomove( board ))
