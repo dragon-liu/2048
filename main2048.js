@@ -83,6 +83,7 @@ function generateOneNumber(){
     //随机一个位置
     var randx = parseInt(Math.floor(Math.random() * 4));
     var randy = parseInt(Math.floor(Math.random() * 4));
+    
     var times = 0;
     while(times < 50)
     {
