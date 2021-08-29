@@ -10,7 +10,10 @@ $(document).ready(function () {
 function newgame(){
     //初始化整个棋盘
     init();
+
     //随机在2个格子生成数字
+    generateOneNumber();
+    generateOneNumber();
 }
 
 function init(){
@@ -43,7 +46,7 @@ function updateBoardView(){
     {
         for(var j = 0; j < 4; j++)
         {
-            $('grid-container').append('<div class="number-cell" id="number-cell-'+i+'-'+j+'"></div>');
+            $('#grid-container').append('<div class="number-cell" id="number-cell-'+i+'-'+j+'"></div>'); //todo:jQuery粘连字符串语法
             var theNumberCell = $('#number-cell-' + i + '-' + j);
 
             if(board[i][j] == 0){
@@ -65,3 +68,29 @@ function updateBoardView(){
     }
 }
 
+function generateOneNumber(){
+
+    if( nospace( board ) )
+        return false;
+
+    //随机一个位置
+    var randx = parseInt(Math.floor(Math.random() * 4));
+    var randy = parseInt(Math.floor(Math.random() * 4));
+    while(true)
+    {
+        if(board[randx][randy] == 0)
+            break;
+        
+            randx = parseInt(Math.floor(Math.random() * 4));
+            randy = parseInt(Math.floor(Math.random() * 4));
+    }
+
+    //随机一个数字2或4
+    var randNumber = Math.random() < 0.5 ? 2 : 4;
+
+    //在随机位置显示该数字
+    board[randx][randy] = randNumber;
+    showNumberWithAnimation(randx, randy, randNumber);
+
+    return true;
+}
