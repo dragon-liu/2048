@@ -17,10 +17,13 @@ function prepareForMobile(){
 
     if(documentWidth > 500)
     {
+        $('header').css('width', 500);
         gridContainerWidth = 500;
         cellSpace = 20;
         cellSideLength = 100;
     }
+    else
+        $('.left').css('align-items', 'center');
 
     $('#grid-container').css('width', gridContainerWidth - 2*cellSpace);
     $('#grid-container').css('height', gridContainerWidth - 2*cellSpace);

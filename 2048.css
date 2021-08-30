@@ -1,29 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+ }
+
+ body{
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+    position: relative;
+    background: #F2EAE3;
+ }
+ 
  header{
-     display: block;
      margin: 0 auto;
      width: 100%;
-     text-align: center;
+
+     display: flex;
+     justify-content: space-between;
+     margin-top: 30px;
+ }
+
+ header .left{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+ }
+
+ header .left .slogan_1 {
+    color: #776E65;
+    font-weight: bold;
+ }
+
+  header .left .slogan_2 {
+    color: #7F7265;
  }
 
  header h1{
+     color: #776E65;
      font-family: Arial, Helvetica, sans-serif;
-     font-size: 40px;
+     font-size: 70px;
      font-weight: bold;
  }
 
  header #newgamebutton{
      display: block;
-     margin: 20px auto;
-
+     margin-top: 10px;
      width: 100px;
-     padding: 10px 10px;
-     background-color: #8f7a66;
-
+     line-height: 34px;
+     padding: 5px;
+     background-color: #907B66;
+     font-size: 14px;
+     border-radius: 3px;
+     font-weight: bold;
      font-family: Arial, Helvetica, sans-serif;
      color: white;
-
-     border-radius: 10px;
-
      text-decoration: none;
  }
 
@@ -31,16 +61,22 @@
     background-color: #9f8b77;
  }
 
- header p{
+ header .right p{
      font-family: Arial, Helvetica, sans-serif;
-     color: white;
-     font-size: 25px;
-     margin: 20px auto;
-     width: 60px;
-     height: 50px;
-     padding: 15px 25px;
+     color: #EEE4DA;
      background-color:#bbada0;
-     border-radius: 10px;
+     font-size: 18px;
+     padding: 10px 5px;
+     margin-top: 10px;
+     width: 100px;
+     border-radius: 3px;
+ }
+
+ header #score{
+    color: #fff;
+    font-size: 22px;
+    letter-spacing: 2px;
+    font-weight: bold;
  }
 
  #grid-container{
