@@ -13,6 +13,11 @@ $(document).ready(function () {
     newgame();
 });
 
+//用于替换伪协议
+window.onload = function(){
+    document.getElementById("newgamebutton").onclick = newgame;
+}
+
 function prepareForMobile(){
 
     if(documentWidth > 500)
